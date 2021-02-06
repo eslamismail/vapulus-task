@@ -16,6 +16,7 @@ this is chat app build with laravel and with front spa nuxt js if you want to le
 - run api on port 8000
 - run front app on port 3000
 - run phpmyadmin on port 8181
+- run mysql on port 5000
 
 ## notes
 
