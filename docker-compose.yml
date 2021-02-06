@@ -1,0 +1,98 @@
+version: "2"
+services:
+  web-service:
+    depends_on:
+      - service-user
+    build:
+      context: ./chat-web
+      dockerfile: Dockerfile
+    container_name: web_service
+    restart: always
+    tty: true
+    environment:
+      container_url: web-service
+    ports:
+      - 3000:3000
+    volumes:
+      - ./chat-web:/app
+      - /app/node_modules
+      - /app/.nuxt
+    networks:
+      - service-network
+
+  socket-service:
+    depends_on:
+      - service-db
+    build:
+      context: ./chat-api
+      dockerfile: Dockerfile
+    container_name: socket_service
+    restart: always
+    command: php artisan websockets:serve
+    tty: true
+    environment:
+      container_url: socket-socket
+    ports:
+      - 6001:6001
+    volumes:
+      - ./chat-api:/app
+      - /app/vendor
+    networks:
+      - service-network
+
+  service-user:
+    depends_on:
+      - service-db
+    build:
+      context: ./chat-api
+      dockerfile: Dockerfile
+    container_name: user_service
+    restart: always
+    tty: true
+    environment:
+      container_url: service-user
+      message_url: service-message
+      room_url: service-room
+      member_url: service-member
+    ports:
+      - 8000:80
+    volumes:
+      - ./chat-api:/app
+      - /app/vendor
+    networks:
+      - service-network
+
+  service-db:
+    image: mysql:5.7.22
+    container_name: service_db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "5000:3306"
+    environment:
+      MYSQL_DATABASE: task_vapulus
+      MYSQL_ROOT_PASSWORD: "012012012"
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - service-network
+    volumes:
+      - service:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: service_phpmyadmin
+    links:
+      - service-db:db
+    ports:
+      - 8181:80
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    networks:
+      - service-network
+
+volumes:
+  service:
+networks:
+  service-network:
+    driver: bridge
