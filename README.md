@@ -25,3 +25,7 @@ this is chat app build with laravel and with front spa nuxt js if you want to le
 - please make sure for port 8181 not used on your machine
 - please make sure for port 3000 not used on your machine
 - please make sure for port 5000 not used on your machine
+
+## after launching
+
+- for api documentaion please visit <a href="http://127.0.0.1:8000/api/documentation">here</a>
