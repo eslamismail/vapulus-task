@@ -50,8 +50,74 @@
                                         "data": {
                                             "type": "Object",
                                             "example": {
-                                                "access_token": "asdasdasdasdasdasd",
-                                                "token_type": "bearer"
+                                                "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC82NC4yMjUuMTA4LjQ5XC9hcGlcL3NlbGxlclwvcmVmcmVzaCIsImlhdCI6MTYxMjU1MTY3NCwiZXhwIjoxNjEyNTU1NDI4LCJuYmYiOjE2MTI1NTE4MjgsImp0aSI6ImFHM1REenpzajFQZmI2cW0iLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Bp4_A1PZKV3w90hDMY4nmIYgbnkm1BubAJwrztlylgo",
+                                                "token_type": "bearer",
+                                                "expires_in": "2021-2-2 23:06"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Sign in",
+                "description": "Login by email, password",
+                "operationId": "authLogin",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password",
+                                    "name"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "email",
+                                        "format": "email",
+                                        "example": "email@exmple.com"
+                                    },
+                                    "name": {
+                                        "type": "name",
+                                        "format": "string",
+                                        "example": "Eslam ismail"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "123456"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "response with token",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "Object",
+                                            "example": {
+                                                "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC82NC4yMjUuMTA4LjQ5XC9hcGlcL3NlbGxlclwvcmVmcmVzaCIsImlhdCI6MTYxMjU1MTY3NCwiZXhwIjoxNjEyNTU1NDI4LCJuYmYiOjE2MTI1NTE4MjgsImp0aSI6ImFHM1REenpzajFQZmI2cW0iLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Bp4_A1PZKV3w90hDMY4nmIYgbnkm1BubAJwrztlylgo",
+                                                "token_type": "bearer",
+                                                "expires_in": "2021-2-2 23:06"
                                             }
                                         }
                                     },

@@ -20,11 +20,34 @@
  *    response=200,
  *    description="response with token",
  *    @OA\JsonContent(
- *       @OA\Property(property="data", type="Object", example={"access_token":"asdasdasdasdasdasd","token_type":"bearer","expires_in":"2021-2-2 23:06"})
+ *       @OA\Property(property="data", type="Object", example={"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC82NC4yMjUuMTA4LjQ5XC9hcGlcL3NlbGxlclwvcmVmcmVzaCIsImlhdCI6MTYxMjU1MTY3NCwiZXhwIjoxNjEyNTU1NDI4LCJuYmYiOjE2MTI1NTE4MjgsImp0aSI6ImFHM1REenpzajFQZmI2cW0iLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Bp4_A1PZKV3w90hDMY4nmIYgbnkm1BubAJwrztlylgo","token_type":"bearer","expires_in":"2021-2-2 23:06"})
  *        )
  *     )
  * )
- *
+ * @OA\Post(
+ * path="/api/auth/register",
+ * summary="Sign in",
+ * description="Login by email, password",
+ * operationId="authLogin",
+ * tags={"auth"},
+ * @OA\RequestBody(
+ *    required=true,
+ *    description="Pass user credentials",
+ *    @OA\JsonContent(
+ *       required={"email","password","name"},
+ *       @OA\Property(property="email", type="email", format="email", example="email@exmple.com"),
+ *       @OA\Property(property="name", type="name", format="string", example="Eslam ismail"),
+ *       @OA\Property(property="password", type="string", format="password", example="123456"),
+ *    ),
+ * ),
+ * @OA\Response(
+ *    response=200,
+ *    description="response with token",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="data", type="Object", example={"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC82NC4yMjUuMTA4LjQ5XC9hcGlcL3NlbGxlclwvcmVmcmVzaCIsImlhdCI6MTYxMjU1MTY3NCwiZXhwIjoxNjEyNTU1NDI4LCJuYmYiOjE2MTI1NTE4MjgsImp0aSI6ImFHM1REenpzajFQZmI2cW0iLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Bp4_A1PZKV3w90hDMY4nmIYgbnkm1BubAJwrztlylgo","token_type":"bearer","expires_in":"2021-2-2 23:06"})
+ *        )
+ *     )
+ * )
  */
 
 namespace App\Http\Controllers;
